@@ -16,3 +16,4 @@ Session.vim
 # Fish local config
 .config/fish/config-local.fish
 
+Brewfile.lock.json
