@@ -7,7 +7,7 @@ call plug#begin()
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-commentary'
-Plug 'jjo/vim-cue'
+" Plug 'jjo/vim-cue'
 Plug 'jacoborus/tender.vim'
 
 if has("nvim")

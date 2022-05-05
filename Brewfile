@@ -20,6 +20,8 @@ brew "tree-sitter", args: ['HEAD']
 brew "luajit", args: ['HEAD']
 brew "neovim", args: ['HEAD']
 
+# Utilities
+brew "slides"
 
 # macOS
 tap "homebrew/cask-fonts"
