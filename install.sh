@@ -26,21 +26,6 @@ link_files () {
   done
 }
 
-setup_linux () {
-  test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)"
-  test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-  echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> ~/.profile
-  brew tap linuxbrew/fonts
-  ln -s /home/linuxbrew/.linuxbrew/share/fonts ~/.local/share/fonts
-  brew bundle
-  fc-cache -fv
-}
-
-setup_macos () {
-  brew tap homebrew/cask-fonts
-  brew bundle
-}
-
 setup_gitpod () {
   link_files
   (
@@ -49,33 +34,20 @@ setup_gitpod () {
   )
 }
 
-setup_neovim () {
-  sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-         https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-  nvim -es '+PlugInstall' '+qall' || true
-}
+setup_linux () {
+  test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)"
+  test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+  echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> ~/.profile
 
-if ! command -v brew &> /dev/null; then
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-fi
+  [[ -n $GITPOD_WORKSPACE_ID ]] && setup_gitpod
+}
 
 OS="$(uname)"
 case $OS in
   'Linux')
-    OS='Linux'
     setup_linux
     ;;
-  'Darwin') 
-    OS='macOS'
-    setup_macos
-    ;;
-  *)
-    [[ -n $GITPOD_WORKSPACE_ID ]] && setup_gitpod
-    ;;
+  'Darwin') ;;
+  *) ;;
 esac
-
-# FZF
-"$(brew --prefix fzf)"/install --key-bindings --completion --update-rc
-
-setup_neovim
 
