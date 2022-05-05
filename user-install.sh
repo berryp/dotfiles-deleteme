@@ -8,7 +8,8 @@ configure_linux () {
   echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> ~/.profile
 
   HOMEBREW_DEVELOPER=1 brew tap linuxbrew/fonts
-  ln -s /home/linuxbrew/.linuxbrew/share/fonts ~/.local/share/fonts || true
+  rm -rf ~/.local/share/fonts/fonts
+  ln -s /home/linuxbrew/.linuxbrew/share/fonts ~/.local/share/fonts
   brew bundle
   fc-cache -fv
 
