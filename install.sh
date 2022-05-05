@@ -2,6 +2,8 @@
 
 set -eo pipefail
 
+DOTFILES_DIR="$HOME/.dotfiles"
+
 link_files () {
   files=(
     ".gitconfig"
@@ -15,22 +17,20 @@ link_files () {
   mkdir -p "$HOME/.config"
 
   for file in "${files[@]}"; do
+    src="$DOTFILES_DIR/$file"
     dest="$HOME/$file"
-    echo "Linking $file → $dest"
+    echo "Linking $src → $dest"
 
     if [ -e "$dest" ]; then
       rm -rf "$dest"
     fi
 
-    ln -fs "$PWD/$file" "$HOME/$file"
+    ln -fs "$src" "$dest"
   done
 }
 
 setup_gitpod () {
-  # link_files
-  env
-  pwd
-  ls -la ~/
+  link_files
   
   # sudo tailscaled | tee ~/.tailscale.log & 
   # sudo -E tailscale up --hostname "gitpod-${GITPOD_WORKSPACE_ID}" --authkey "${TAILSCALE_AUTHKEY}"
