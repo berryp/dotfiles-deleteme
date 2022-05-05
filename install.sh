@@ -28,26 +28,9 @@ link_files () {
 
 setup_gitpod () {
   link_files
-  (
-    sudo tailscaled | tee ~/.tailscale.log & 
-    sudo -E tailscale up --hostname "gitpod-${GITPOD_WORKSPACE_ID}" --authkey "${TAILSCALE_AUTHKEY}"
-  )
+  
+  sudo tailscaled | tee ~/.tailscale.log & 
+  sudo -E tailscale up --hostname "gitpod-${GITPOD_WORKSPACE_ID}" --authkey "${TAILSCALE_AUTHKEY}"
 }
 
-setup_linux () {
-  test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)"
-  test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-  echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> ~/.profile
-
-  [[ -n $GITPOD_WORKSPACE_ID ]] && setup_gitpod
-}
-
-OS="$(uname)"
-case $OS in
-  'Linux')
-    setup_linux
-    ;;
-  'Darwin') ;;
-  *) ;;
-esac
-
+[[ -n $GITPOD_WORKSPACE_ID ]] && setup_gitpod
