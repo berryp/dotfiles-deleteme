@@ -45,4 +45,6 @@ if test -f $LOCAL_CONFIG
   source $LOCAL_CONFIG
 end
 
-eval (direnv hook fish)
+if type -q direnv
+  eval (direnv hook fish)
+end

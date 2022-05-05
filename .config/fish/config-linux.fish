@@ -3,3 +3,7 @@ if type -q exa
   alias lla "ll -a"
 end
 
+# Homebrew
+set -gx PATH /home/linuxbrew/.linuxbrew/bin/ $PATH
+
+
