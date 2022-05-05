@@ -8,7 +8,7 @@ configure_linux () {
   echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> ~/.profile
 
   HOMEBREW_DEVELOPER=1 brew tap linuxbrew/fonts
-  rm -rf ~/.local/share/fonts/fonts
+  rm -rf ~/.local/share/fonts
   ln -s /home/linuxbrew/.linuxbrew/share/fonts ~/.local/share/fonts
   brew bundle
   fc-cache -fv
@@ -35,7 +35,8 @@ setup_neovim () {
 setup_fish () {
   fish -c 'curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source \
     && fisher install jorgebucaran/fisher \
-    && fisher fisher update'
+    && fisher install ilancosman/tide@v5 \
+    && fisher install jethrokuan/z'
 }
 
 if ! command -v brew &> /dev/null; then
