@@ -7,12 +7,12 @@ configure_linux () {
   test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
   echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> ~/.profile
 
-  brew tap linuxbrew/fonts
-  ln -s /home/linuxbrew/.linuxbrew/share/fonts ~/.local/share/fonts
+  HOMEBREW_DEVELOPER=1 brew tap linuxbrew/fonts
+  ln -s /home/linuxbrew/.linuxbrew/share/fonts ~/.local/share/fonts || true
   brew bundle
   fc-cache -fv
 
-  [[ -n $GITPOD_WORKSPACE_ID ]] && setup_gitpod
+  [[ -n $GITPOD_WORKSPACE_ID ]] && configure_gitpod
 }
 
 configure_macos () {
@@ -21,11 +21,8 @@ configure_macos () {
 }
 
 configure_gitpod () {
-  link_files
-  (
-    sudo tailscaled | tee ~/.tailscale.log & 
-    sudo -E tailscale up --hostname "gitpod-${GITPOD_WORKSPACE_ID}" --authkey "${TAILSCALE_AUTHKEY}"
-  )
+  sudo tailscaled | tee ~/.tailscale.log & 
+  sudo -E tailscale up --hostname "gitpod-${GITPOD_WORKSPACE_ID}" --authkey "${TAILSCALE_AUTHKEY}"
 }
 
 setup_neovim () {
@@ -34,8 +31,14 @@ setup_neovim () {
   nvim -es '+PlugInstall' '+qall' || true
 }
 
+setup_fish () {
+  fish -c 'curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source \
+    && fisher install jorgebucaran/fisher \
+    && fisher fisher update'
+}
+
 if ! command -v brew &> /dev/null; then
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  echo | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
 OS="$(uname)"
@@ -54,3 +57,4 @@ esac
 
 setup_neovim
 
+setup_fish

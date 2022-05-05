@@ -8,10 +8,9 @@ brew "fish"
 brew "shellcheck"
 
 # Neovim
-brew "tree-sitter", args: ['HEAD']
 brew "luajit", args: ['HEAD']
 brew "neovim", args: ['HEAD']
 
 # Fonts
-brew "font-fira-code-nerd-font", args: ['HEAD']
+brew "font-fira-code-nerd-font"
 
