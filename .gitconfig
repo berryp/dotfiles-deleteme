@@ -55,3 +55,6 @@
 	process = git-lfs filter-process
 [ghq]
   root = ~/code
+[user]
+	name = Berry Phillips
+	email = berryphillips@gmail.com
