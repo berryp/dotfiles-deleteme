@@ -4,31 +4,14 @@ brew "ghq"                # Manage remote repository clones
 brew "peco"               # Simplistic interactive filtering tool
 brew "fzf"
 brew "direnv"
-
-# Languages & tools
-brew "go"
-brew "cue-lang/tap/cue"
-brew "dagger/tap/dagger"
-
-# Kubernetes
-brew "lima"               # Linux Virtual Machines (containerd)
-brew "kubectl"
-#brew "krew"              # kubectl plugin manager
+brew "fish"
+brew "shellcheck"
 
 # Neovim
 brew "tree-sitter", args: ['HEAD']
 brew "luajit", args: ['HEAD']
 brew "neovim", args: ['HEAD']
 
-# Utilities
-brew "slides"
-
-# macOS
-tap "homebrew/cask-fonts"
-cask "font-fira-code-nerd-font"
-cask "raycast"
-cask "1password-cli"
-
-#mas "1Password", id: 443987910 # Awaiting 8
-mas "Adobe Lightroom", id: 1451544217
+# Fonts
+brew "font-fira-code-nerd-font", args: ['HEAD']
 
