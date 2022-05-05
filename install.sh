@@ -27,7 +27,7 @@ link_files () {
 }
 
 setup_gitpod () {
-  link_files
+  # link_files
   
   sudo tailscaled | tee ~/.tailscale.log & 
   sudo -E tailscale up --hostname "gitpod-${GITPOD_WORKSPACE_ID}" --authkey "${TAILSCALE_AUTHKEY}"
