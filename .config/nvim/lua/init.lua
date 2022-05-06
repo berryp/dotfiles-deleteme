@@ -32,6 +32,7 @@ treesitter.setup {
     "json",
     "json5",
     "lua",
+    "nix",
     "python",
     "typescript",
     "toml",
