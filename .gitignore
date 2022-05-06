@@ -17,3 +17,5 @@ Session.vim
 .config/fish/config-local.fish
 
 Brewfile.lock.json
+
+nixpkgs/home.nix

@@ -4,7 +4,7 @@ set -eo pipefail
 
 dotfiles_dir="$HOME/.dotfiles"
 
-if [ -d /nix ]; then
+if [[ -d /nix ]]; then
   mkdir -p ~/.config
 
   rm -rf ~/.config/nixpkgs
@@ -18,7 +18,6 @@ if [ -d /nix ]; then
   nix-shell '<home-manager>' -A install
 
   rm ~/.config/nixpkgs/home.nix
-
   home-manager switch --fkake .#gitpod
 fi
 

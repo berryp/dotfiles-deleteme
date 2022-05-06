@@ -1,11 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  home.username = username;
-  home.homeDirectory = home_dir;
-
-  home.stateVersion = "22.05";
-
   home.packages = with pkgs; [
     gnupg
     tmux
